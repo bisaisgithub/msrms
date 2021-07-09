@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrameLogin extends JFrame {
 
@@ -73,6 +75,15 @@ public class FrameLogin extends JFrame {
 		contentPane.add(txtPassword);
 		
 		JButton btnLogin = new JButton("LOGIN");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					
+				}catch(Exception e1){
+					System.out.println(e1.getMessage());
+				}
+			}
+		});
 		btnLogin.setBorder(null);
 		btnLogin.setForeground(Color.WHITE);
 		btnLogin.setFont(new Font("SansSerif", Font.PLAIN, 11));
