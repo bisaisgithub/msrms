@@ -18,7 +18,7 @@ import java.awt.event.ActionEvent;
 public class FrameLogin extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField txtEmailAddress;
 	private JTextField txtPassword;
 
 
@@ -54,10 +54,10 @@ public class FrameLogin extends JFrame {
 		lblNewLabel_2.setBounds(103, 276, 295, 14);
 		contentPane.add(lblNewLabel_2);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(103, 350, 312, 31);
-		contentPane.add(textField);
+		txtEmailAddress = new JTextField();
+		txtEmailAddress.setColumns(10);
+		txtEmailAddress.setBounds(103, 350, 312, 31);
+		contentPane.add(txtEmailAddress);
 		
 		JLabel lblEmailAddressLogin = new JLabel("Email Address");
 		lblEmailAddressLogin.setFont(new Font("SansSerif", Font.PLAIN, 11));
@@ -78,9 +78,10 @@ public class FrameLogin extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					
+					String emailAddress = txtEmailAddress.getText();
+					String password = txtPassword.getText();
 				}catch(Exception e1){
-					System.out.println(e1.getMessage());
+					e1.printStackTrace();
 				}
 			}
 		});
