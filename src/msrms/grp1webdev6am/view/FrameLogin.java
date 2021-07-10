@@ -12,8 +12,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import msrms.grp1webdev6am.controller.LoginDAO;
+import msrms.grp1webdev6am.model.LoginModel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Objects;
 
 public class FrameLogin extends JFrame {
 
@@ -77,9 +82,44 @@ public class FrameLogin extends JFrame {
 		JButton btnLogin = new JButton("LOGIN");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				try {
 					String emailAddress = txtEmailAddress.getText();
 					String password = txtPassword.getText();
+					
+					LoginModel loginModelFrame = new LoginModel();
+					
+					loginModelFrame.setEmailAddress(emailAddress);
+					loginModelFrame.setPassword(password);
+//					System.out.println(loginModel.getEmailAddress());
+//					System.out.println(loginModel.getPassword());
+					
+					LoginDAO loginDAO = new LoginDAO();
+					
+					LoginModel loginModelDB = loginDAO.authenticateUser(loginModelFrame);
+					
+					System.out.println(loginModelFrame.getEmailAddress());
+					System.out.println(loginModelFrame.getPassword());
+					System.out.println(loginModelDB.getEmailAddress());
+					System.out.println(loginModelDB.getPassword());
+					
+					if(loginModelFrame.getEmailAddress().equals(loginModelDB.getEmailAddress())) {
+						System.out.println("FrameLogin Login Success");
+						dispose();
+						FrameClass frameClass = new FrameClass();
+						frameClass.show();
+					}else {
+						System.out.println("FrameLogin Login Failed");
+					}
+					
+					
+//					if(userValidate.equals("SUCCESS")) {
+//						System.out.println();
+//						System.out.println("Success Login FramLogin");
+//					}else {
+//						System.out.println("Fail Login FrameLogin");
+//					}
+					
 				}catch(Exception e1){
 					e1.printStackTrace();
 				}
