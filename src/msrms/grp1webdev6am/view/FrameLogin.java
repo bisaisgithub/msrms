@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JOptionPane;
 
 import msrms.grp1webdev6am.controller.LoginDAO;
 import msrms.grp1webdev6am.model.LoginModel;
@@ -19,12 +20,13 @@ import msrms.grp1webdev6am.model.LoginModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.Objects;
+import javax.swing.JPasswordField;
 
 public class FrameLogin extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtEmailAddress;
-	private JTextField txtPassword;
+	private JTextField txtEmailAddressLogin;
+	private JPasswordField txtPasswordLogin;
 
 
 	/**
@@ -51,18 +53,18 @@ public class FrameLogin extends JFrame {
 		setBounds(100, 100, 1000, 700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel_2 = new JLabel("Student Record Management System (MSMMS)");
 		lblNewLabel_2.setFont(new Font("SansSerif", Font.PLAIN, 11));
 		lblNewLabel_2.setBounds(103, 276, 295, 14);
 		contentPane.add(lblNewLabel_2);
 		
-		txtEmailAddress = new JTextField();
-		txtEmailAddress.setColumns(10);
-		txtEmailAddress.setBounds(103, 350, 312, 31);
-		contentPane.add(txtEmailAddress);
+		txtEmailAddressLogin = new JTextField();
+		txtEmailAddressLogin.setColumns(10);
+		txtEmailAddressLogin.setBounds(103, 350, 312, 31);
+		contentPane.add(txtEmailAddressLogin);
 		
 		JLabel lblEmailAddressLogin = new JLabel("Email Address");
 		lblEmailAddressLogin.setFont(new Font("SansSerif", Font.PLAIN, 11));
@@ -74,18 +76,13 @@ public class FrameLogin extends JFrame {
 		lblPasswordLogin.setBounds(103, 386, 99, 14);
 		contentPane.add(lblPasswordLogin);
 		
-		txtPassword = new JTextField();
-		txtPassword.setColumns(10);
-		txtPassword.setBounds(103, 401, 312, 31);
-		contentPane.add(txtPassword);
-		
 		JButton btnLogin = new JButton("LOGIN");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
-					String emailAddress = txtEmailAddress.getText();
-					String password = txtPassword.getText();
+					String emailAddress = txtEmailAddressLogin.getText();
+					String password = txtPasswordLogin.getText();
 					
 					LoginModel loginModelFrame = new LoginModel();
 					
@@ -109,8 +106,13 @@ public class FrameLogin extends JFrame {
 						FrameClass frameClass = new FrameClass();
 						frameClass.show();
 					}else {
+						JOptionPane.showMessageDialog(null, "Email Address or Password Invalid");
 						System.out.println("FrameLogin Login Failed");
+						txtEmailAddressLogin.setText("");
+						txtPasswordLogin.setText("");
 					}
+					
+					
 					
 					
 //					if(userValidate.equals("SUCCESS")) {
@@ -132,12 +134,14 @@ public class FrameLogin extends JFrame {
 		btnLogin.setBounds(103, 443, 312, 31);
 		contentPane.add(btnLogin);
 		
-		JLabel lblLoginForm = new JLabel("");
-		lblLoginForm.setIcon(new ImageIcon("C:\\Users\\mar\\eclipse-proj1\\msrms\\src\\img\\loginForm.jpg"));
-
-		lblLoginForm.setBounds(0, 0, 1000, 700);
-		contentPane.add(lblLoginForm);
+		txtPasswordLogin = new JPasswordField();
+		txtPasswordLogin.setBounds(103, 402, 312, 31);
+		contentPane.add(txtPasswordLogin);
+		
+		JLabel lblBackgroundLogin = new JLabel("New label");
+		lblBackgroundLogin.setIcon(new ImageIcon("C:\\Users\\mar\\eclipse-proj1\\msrms\\src\\img\\loginForm.jpg"));
+		lblBackgroundLogin.setBounds(0, 0, 1000, 700);
+		contentPane.add(lblBackgroundLogin);
 		setLocationRelativeTo(null);
 	}
-
 }
