@@ -2,35 +2,34 @@ package msrms.grp1webdev6am.view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Color;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-public class FrameClass extends JFrame {
+import java.awt.Color;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
+public class FrameStudent extends JFrame {
 
 	private JPanel contentPane;
 	DefaultTableModel model;
 	private JTable table;
 	private JScrollPane scrollPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField txtID;
+	private JTextField txtEmailAddress;
+	private JTextField txtFullname;
+	private JTextField txtMobile;
+	private JTextField txtCity;
+	private JTextField txtProvince;
 
 	/**
 	 * Launch the application.
@@ -39,7 +38,7 @@ public class FrameClass extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrameClass frame = new FrameClass();
+					FrameStudent frame = new FrameStudent();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,20 +50,19 @@ public class FrameClass extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrameClass() {
+	public FrameStudent() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 700);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setLayout(null);
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(0, 0, 986, 663);
 		contentPane.add(panel);
-		panel.setLayout(null);
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(67, 135, 857, 474);
@@ -78,42 +76,48 @@ public class FrameClass extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"ID", "Email Address", "Full Name", "Class Name", "Instructor", "Status"
+				"ID", "Email Address", "Full Name", "Mobile", "City", "Province"
 			}
 		));
 		scrollPane.setViewportView(table);
 		
-		textField = new JTextField();
-		textField.setBounds(67, 100, 143, 25);
-		panel.add(textField);
-		textField.setColumns(10);
+		txtID = new JTextField();
+		txtID.setColumns(10);
+		txtID.setBounds(67, 100, 143, 25);
+		panel.add(txtID);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(209, 100, 143, 25);
-		panel.add(textField_1);
+		txtEmailAddress = new JTextField();
+		txtEmailAddress.setColumns(10);
+		txtEmailAddress.setBounds(209, 100, 143, 25);
+		panel.add(txtEmailAddress);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(352, 100, 143, 25);
-		panel.add(textField_2);
+		txtFullname = new JTextField();
+		txtFullname.setColumns(10);
+		txtFullname.setBounds(352, 100, 143, 25);
+		panel.add(txtFullname);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(494, 100, 143, 25);
-		panel.add(textField_3);
+		txtMobile = new JTextField();
+		txtMobile.setColumns(10);
+		txtMobile.setBounds(494, 100, 143, 25);
+		panel.add(txtMobile);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(635, 100, 143, 25);
-		panel.add(textField_4);
+		txtCity = new JTextField();
+		txtCity.setColumns(10);
+		txtCity.setBounds(635, 100, 143, 25);
+		panel.add(txtCity);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(776, 100, 143, 25);
-		panel.add(textField_5);
+		txtProvince = new JTextField();
+		txtProvince.setText("Province");
+		txtProvince.setColumns(10);
+		txtProvince.setBounds(776, 100, 143, 25);
+		panel.add(txtProvince);
 		
 		JButton btnAdd = new JButton("");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnAdd.setBackground(Color.WHITE);
 		btnAdd.setBorder(null);
 		btnAdd.setIcon(new ImageIcon("C:\\Users\\mar\\eclipse-proj1\\msrms\\src\\img\\add.png"));
@@ -145,8 +149,9 @@ public class FrameClass extends JFrame {
 		btnSearch.setBounds(177, 51, 45, 39);
 		panel.add(btnSearch);
 		model=new DefaultTableModel();
-		Object [] column = {"ID", "Email Address", "Full Name", "Class Name", "Instructor", "Status"};
+		Object [] column = {"ID", "Email Address", "Full Name", "Mobile", "City", "Province"};
 		Object [] row = new Object[0];
 		model.setColumnIdentifiers(column);
 	}
+
 }
