@@ -49,6 +49,22 @@ public class LoginDAO {
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
+		}finally {
+		    if (resultSet != null) {
+		        try {
+		        	resultSet.close();
+		        } catch (SQLException e) { /* Ignored */}
+		    }
+		    if (statement != null) {
+		        try {
+		        	statement.close();
+		        } catch (SQLException e) { /* Ignored */}
+		    }
+		    if (con != null) {
+		        try {
+		        	con.close();
+		        } catch (SQLException e) { /* Ignored */}
+		    }
 		}
 		return loginModelDAO;
 		
