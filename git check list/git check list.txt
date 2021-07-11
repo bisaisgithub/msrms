@@ -4,7 +4,8 @@ First time steps
 
 1. git clone repoURL
 2. git checkout -b branchname
-3. open the project in IDE and start coding and close IDE when done
+3. open the project in IDE and verify in IDE that you are in correct branch then
+   start coding and close IDE when done
 4. git status
 5. git add
 6. git commit -m "notes/comment"
@@ -17,7 +18,8 @@ First time steps
 1. verify you are in master, else checkout
 2. git pull origin master
 3. git check -b branchname
-4. open the project in IDE and start coding and close IDE when done
+4. open the project in IDE and verify in IDE that you are in correct branch then
+   start coding and close IDE when done
 5. git status
 6. git add
 7. git commit -m "notes/comment"

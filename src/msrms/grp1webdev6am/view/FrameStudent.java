@@ -7,9 +7,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import msrms.grp1webdev6am.controller.LoginDAO;
+import msrms.grp1webdev6am.controller.StudentAddDao;
+import msrms.grp1webdev6am.model.LoginModel;
+import msrms.grp1webdev6am.model.StudentAddModel;
 
 import java.awt.Color;
 import javax.swing.JScrollPane;
@@ -17,6 +23,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
+import java.sql.SQLException;
 
 public class FrameStudent extends JFrame {
 
@@ -115,7 +123,29 @@ public class FrameStudent extends JFrame {
 		JButton btnAdd = new JButton("");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
+				try {
+					String emailAddress = txtEmailAddress.getText();
+					String fullname = txtFullname.getText();
+					String mobile = txtMobile.getText();
+					String city = txtCity.getText();
+					String province = txtProvince.getText();
+
+					StudentAddModel newStudent = new StudentAddModel(emailAddress, fullname, mobile, city, province);
+					System.out.println(newStudent.getEmailAddress());
+					System.out.println(newStudent.getFullname());
+					System.out.println(newStudent.getMobile());
+					System.out.println(newStudent.getCity());
+					System.out.println(newStudent.getProvince());
+					
+					StudentAddDao insertStudentDao = new StudentAddDao();
+					insertStudentDao.insertStudent(newStudent);
+
+										
+				}catch(SQLException e1){
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Failed Adding the Student");
+				}
 			}
 		});
 		btnAdd.setBackground(Color.WHITE);
