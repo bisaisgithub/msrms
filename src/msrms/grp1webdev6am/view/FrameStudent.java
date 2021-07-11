@@ -15,6 +15,7 @@ import javax.swing.table.TableModel;
 
 import msrms.grp1webdev6am.controller.LoginDAO;
 import msrms.grp1webdev6am.controller.StudentAddDao;
+import msrms.grp1webdev6am.controller.StudentDeleteBenarDao;
 import msrms.grp1webdev6am.controller.StudentEditBenarDao;
 import msrms.grp1webdev6am.controller.StudentGetAllBEnarDao;
 import msrms.grp1webdev6am.model.LoginModel;
@@ -196,6 +197,26 @@ public class FrameStudent extends JFrame {
 		panel.add(btnEdit);
 		
 		JButton btnDelete = new JButton("");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int deleteID = Integer.parseInt(txtID.getText());
+					System.out.println("Not Empty ID");
+					StudentModel editStudent = new StudentModel(deleteID);
+					StudentDeleteBenarDao studentEditBenarDao = new StudentDeleteBenarDao();
+					studentEditBenarDao.deleteStudent(deleteID);
+					
+				}catch(Exception ex){
+					ex.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Empty ID");
+				}
+				if(Integer.parseInt(txtID.getText()) >= 0) {
+					System.out.println("Empty ID");
+				}else {
+					System.out.println("Empty Not Empty");
+				}
+			}
+		});
 		btnDelete.setBackground(Color.WHITE);
 		btnDelete.setBorder(null);
 		btnDelete.setIcon(new ImageIcon("C:\\Users\\mar\\eclipse-proj1\\msrms\\src\\img\\delete.png"));
