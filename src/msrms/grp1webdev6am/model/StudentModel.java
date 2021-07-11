@@ -27,6 +27,21 @@ public class StudentModel {
 		this.city = city;
 		this.province = province;
 	}
+	public StudentModel(String fullname, String mobile, String city, String province) {
+		super();
+		this.fullname = fullname;
+		this.mobile = mobile;
+		this.city = city;
+		this.province = province;
+	}
+	public StudentModel(int id, String fullname, String mobile, String city, String province) {
+		super();
+		this.id = id;
+		this.fullname = fullname;
+		this.mobile = mobile;
+		this.city = city;
+		this.province = province;
+	}
 	public String getEmailAddress() {
 		return emailAddress;
 	}
