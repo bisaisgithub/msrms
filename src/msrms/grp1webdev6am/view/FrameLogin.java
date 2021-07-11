@@ -103,8 +103,8 @@ public class FrameLogin extends JFrame {
 					if(loginModelFrame.getEmailAddress().equals(loginModelDB.getEmailAddress())) {
 						System.out.println("FrameLogin Login Success");
 						dispose();
-						FrameClass frameClass = new FrameClass();
-						frameClass.show();
+						FrameStudent frameStudent = new FrameStudent();
+						frameStudent.show();
 					}else {
 						JOptionPane.showMessageDialog(null, "Email Address or Password Invalid");
 						System.out.println("FrameLogin Login Failed");
