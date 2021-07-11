@@ -42,6 +42,10 @@ public class StudentModel {
 		this.city = city;
 		this.province = province;
 	}
+	public StudentModel(int id) {
+		super();
+		this.id = id;
+	}
 	public String getEmailAddress() {
 		return emailAddress;
 	}
