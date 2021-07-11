@@ -11,7 +11,10 @@ First time steps
 6. git commit -m "notes/comment"
 7. git push origin branchname
 8. pull request github
-9. delete branch in github and local
+9. delete branch in github
+10. pull on master
+11. delete local branch
+12. checkout new branch
 
 
 2nd time and so on
