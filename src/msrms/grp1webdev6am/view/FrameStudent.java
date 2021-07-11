@@ -14,8 +14,10 @@ import javax.swing.table.DefaultTableModel;
 
 import msrms.grp1webdev6am.controller.LoginDAO;
 import msrms.grp1webdev6am.controller.StudentAddDao;
+import msrms.grp1webdev6am.controller.StudentGetAllBEnarDao;
 import msrms.grp1webdev6am.model.LoginModel;
 import msrms.grp1webdev6am.model.StudentAddModel;
+import msrms.grp1webdev6am.model.StudentModel;
 
 import java.awt.Color;
 import javax.swing.JScrollPane;
@@ -25,6 +27,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class FrameStudent extends JFrame {
 
@@ -48,6 +51,7 @@ public class FrameStudent extends JFrame {
 				try {
 					FrameStudent frame = new FrameStudent();
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -59,6 +63,7 @@ public class FrameStudent extends JFrame {
 	 * Create the frame.
 	 */
 	public FrameStudent() {
+				
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 700);
 		contentPane = new JPanel();
@@ -79,7 +84,7 @@ public class FrameStudent extends JFrame {
 		table = new JTable();
 		table.setColumnSelectionAllowed(true);
 		table.setCellSelectionEnabled(true);
-		table.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		table.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -115,7 +120,6 @@ public class FrameStudent extends JFrame {
 		panel.add(txtCity);
 		
 		txtProvince = new JTextField();
-		txtProvince.setText("Province");
 		txtProvince.setColumns(10);
 		txtProvince.setBounds(776, 100, 143, 25);
 		panel.add(txtProvince);
@@ -131,7 +135,7 @@ public class FrameStudent extends JFrame {
 					String city = txtCity.getText();
 					String province = txtProvince.getText();
 
-					StudentAddModel newStudent = new StudentAddModel(emailAddress, fullname, mobile, city, province);
+					StudentModel newStudent = new StudentModel(emailAddress, fullname, mobile, city, province);
 					System.out.println(newStudent.getEmailAddress());
 					System.out.println(newStudent.getFullname());
 					System.out.println(newStudent.getMobile());
@@ -178,10 +182,29 @@ public class FrameStudent extends JFrame {
 		btnSearch.setIcon(new ImageIcon("C:\\Users\\mar\\eclipse-proj1\\msrms\\src\\img\\search.png"));
 		btnSearch.setBounds(177, 51, 45, 39);
 		panel.add(btnSearch);
-		model=new DefaultTableModel();
-		Object [] column = {"ID", "Email Address", "Full Name", "Mobile", "City", "Province"};
-		Object [] row = new Object[0];
-		model.setColumnIdentifiers(column);
+//		model=new DefaultTableModel();
+//		Object [] column = {"ID", "Email Address", "Full Name", "Mobile", "City", "Province"};
+//		Object [] row = new Object[0];
+//		model.setColumnIdentifiers(column);
+		showAllStudents();
 	}
+	public void showAllStudents(){
+	   
+		   StudentGetAllBEnarDao getAllBenarDao = new StudentGetAllBEnarDao();
+	       List<StudentModel> list = getAllBenarDao.getAllStudents();
+	       DefaultTableModel model = (DefaultTableModel)table.getModel();
+	       Object[] row = new Object[6];
+	       for(int i = 0; i < list.size(); i++)
+	       {
+	           row[0] = list.get(i).getId();
+	           row[1] = list.get(i).getEmailAddress();
+	           row[2] = list.get(i).getFullname();
+	           row[3] = list.get(i).getMobile();
+	           row[4] = list.get(i).getCity();
+	           row[5] = list.get(i).getProvince();
+	           
+	           model.addRow(row);
+	       }
+	    }
 
 }

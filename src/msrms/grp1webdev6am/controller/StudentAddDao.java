@@ -14,7 +14,7 @@ public class StudentAddDao {
 	private static final String INSERT_USERS_SQL = "INSERT INTO students" + "  (emailAddress, fullName, mobile, City, province) VALUES "
 			+ " (?, ?, ?, ?, ?);";
 	
-	public void insertStudent(StudentAddModel student) throws SQLException {
+	public void insertStudent(StudentModel student) throws SQLException {
 		System.out.println(INSERT_USERS_SQL);
 		// try-with-resource statement will auto close the connection.
 		try (Connection connection = DBConnection.createConnection();

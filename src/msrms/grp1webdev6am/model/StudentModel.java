@@ -1,6 +1,7 @@
 package msrms.grp1webdev6am.model;
 
 public class StudentModel {
+	protected int id;
 	protected String emailAddress;
 	protected String fullname;
 	protected String mobile;
@@ -8,6 +9,15 @@ public class StudentModel {
 	protected String province;
 	public StudentModel() {
 		super();
+	}
+	public StudentModel(int id, String emailAddress, String fullname, String mobile, String city, String province) {
+		super();
+		this.id = id;
+		this.emailAddress = emailAddress;
+		this.fullname = fullname;
+		this.mobile = mobile;
+		this.city = city;
+		this.province = province;
 	}
 	public StudentModel(String emailAddress, String fullname, String mobile, String city, String province) {
 		super();
@@ -47,6 +57,11 @@ public class StudentModel {
 	public void setProvince(String province) {
 		this.province = province;
 	}
-	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 }
