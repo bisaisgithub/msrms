@@ -15,6 +15,7 @@ import javax.swing.table.TableModel;
 
 import msrms.grp1webdev6am.controller.LoginDAO;
 import msrms.grp1webdev6am.controller.StudentAddDao;
+import msrms.grp1webdev6am.controller.StudentEditBenarDao;
 import msrms.grp1webdev6am.controller.StudentGetAllBEnarDao;
 import msrms.grp1webdev6am.model.LoginModel;
 import msrms.grp1webdev6am.model.StudentAddModel;
@@ -167,6 +168,27 @@ public class FrameStudent extends JFrame {
 		panel.add(btnAdd);
 		
 		JButton btnEdit = new JButton("");
+		btnEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					int editID = Integer.parseInt(txtID.getText());
+					System.out.println("Not Empty ID");
+					StudentModel editStudent = new StudentModel(editID, txtFullname.getText(), txtMobile.getText(), txtCity.getText(), txtProvince.getText());
+					StudentEditBenarDao studentEditBenarDao = new StudentEditBenarDao();
+					studentEditBenarDao.updateStudent(editStudent);
+					
+				}catch(Exception ex){
+					ex.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Empty ID");
+				}
+				if(Integer.parseInt(txtID.getText()) >= 0) {
+					System.out.println("Empty ID");
+				}else {
+					System.out.println("Empty Not Empty");
+				}
+			}
+		});
 		btnEdit.setBackground(Color.WHITE);
 		btnEdit.setBorder(null);
 		btnEdit.setIcon(new ImageIcon("C:\\Users\\mar\\eclipse-proj1\\msrms\\src\\img\\edit.png"));
