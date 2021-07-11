@@ -7,6 +7,7 @@ import java.sql.Statement;
 
 
 import msrms.grp1webdev6am.model.LoginModel;
+import msrms.grp1webdev6am.query.DataQuery;
 import msrms.grp1webdev6am.util.DBConnection;
 
 public class LoginDAO {
@@ -16,7 +17,7 @@ public class LoginDAO {
 	
 	public LoginModel authenticateUser(LoginModel loginModelFrame) {
 		
-		String sqlLogin = "select emailAddress, password from users where emailAddress='"+loginModelFrame.getEmailAddress()+"' and password='"+loginModelFrame.getPassword()+"'";
+//		String sqlLogin = "select emailAddress, password from users where emailAddress='"+loginModelFrame.getEmailAddress()+"' and password='"+loginModelFrame.getPassword()+"'";
 
 		Connection con = null;
 		Statement statement = null;
@@ -26,10 +27,12 @@ public class LoginDAO {
 //		String passwordDB = "";
 		
 		LoginModel loginModelDAO = new LoginModel();
+		DataQuery query = new DataQuery();
+		DBConnection db = new DBConnection();
 		try {
-			con = DBConnection.createConnection();
+			con = db.createConnection();
 			statement = con.createStatement();
-			resultSet = statement.executeQuery(sqlLogin);
+			resultSet = statement.executeQuery(query.login_query("users", loginModelFrame.getEmailAddress(), loginModelFrame.getPassword()));
 			
 			while(resultSet.next()) {
 				

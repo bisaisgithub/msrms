@@ -5,15 +5,18 @@ import java.sql.DriverManager;
 
 public class DBConnection {
 	
-	public static Connection createConnection() {
+	public Connection createConnection() {
 		Connection con = null;
-		String jdbcURL = "jdbc:mysql://localhost:3306/msrms?useSSL=false";
+//		String jdbcURL = "jdbc:mysql://localhost:3306/msrms?useSSL=false";
+		String jdbcURL = "jdbc:mysql://localhost:3307/msrms?useSSL=false";
 		String jdbcUsername = "root";
-		String jdbcPassword = "root";
+//		String jdbcPassword = "root";
+		String jdbcPassword = "emman";
 		
 		try {
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
+//				Class.forName("com.mysql.jdbc.Driver");
+				Class.forName("com.mysql.cj.jdbc.Driver");
 			}catch(ClassNotFoundException e) {
 				e.printStackTrace();
 			}

@@ -8,17 +8,20 @@ import javax.swing.JOptionPane;
 
 import msrms.grp1webdev6am.model.StudentAddModel;
 import msrms.grp1webdev6am.model.StudentModel;
+import msrms.grp1webdev6am.query.DataQuery;
 import msrms.grp1webdev6am.util.DBConnection;
 
 public class StudentAddDao {
-	private static final String INSERT_USERS_SQL = "INSERT INTO students" + "  (emailAddress, fullName, mobile, City, province) VALUES "
-			+ " (?, ?, ?, ?, ?);";
+//	private static final String INSERT_USERS_SQL = "INSERT INTO students" + "  (emailAddress, fullName, mobile, City, province) VALUES "
+//			+ " (?, ?, ?, ?, ?);";
 	
 	public void insertStudent(StudentAddModel student) throws SQLException {
-		System.out.println(INSERT_USERS_SQL);
+		DataQuery query = new DataQuery();
+		System.out.println(query.insert_students("students"));
+		DBConnection db = new DBConnection();
 		// try-with-resource statement will auto close the connection.
-		try (Connection connection = DBConnection.createConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
+		try (Connection connection = db.createConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(query.insert_students("students"))) {
 			preparedStatement.setString(1, student.getEmailAddress());
 			preparedStatement.setString(2, student.getFullname());
 			preparedStatement.setString(3, student.getMobile());
