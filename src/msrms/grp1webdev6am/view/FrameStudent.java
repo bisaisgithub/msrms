@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import msrms.grp1webdev6am.controller.LoginDAO;
 import msrms.grp1webdev6am.controller.StudentAddDao;
@@ -41,6 +42,7 @@ public class FrameStudent extends JFrame {
 	private JTextField txtMobile;
 	private JTextField txtCity;
 	private JTextField txtProvince;
+	
 
 	/**
 	 * Launch the application.
@@ -82,8 +84,8 @@ public class FrameStudent extends JFrame {
 		panel.add(scrollPane);
 		
 		table = new JTable();
-		table.setColumnSelectionAllowed(true);
-		table.setCellSelectionEnabled(true);
+		table.setColumnSelectionAllowed(false);
+		table.setCellSelectionEnabled(false);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -92,6 +94,12 @@ public class FrameStudent extends JFrame {
 				"ID", "Email Address", "Full Name", "Mobile", "City", "Province"
 			}
 		));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+           public void mouseClicked(java.awt.event.MouseEvent evt) {
+               jTable_Display_UsersMouseClicked(evt);
+           }
+        });
+
 		scrollPane.setViewportView(table);
 		
 		txtID = new JTextField();
@@ -205,6 +213,21 @@ public class FrameStudent extends JFrame {
 	           
 	           model.addRow(row);
 	       }
+	    }
+	   private void jTable_Display_UsersMouseClicked(java.awt.event.MouseEvent evt) {                                                  
+	       // Get The Index Of The Slected Row 
+	        int i = table.getSelectedRow();
+	        System.out.println("table clicked");
+
+	        TableModel model = table.getModel();
+	        
+	         // Display Slected Row In JTexteFields
+	        txtID.setText(model.getValueAt(i,0).toString());
+	        txtEmailAddress.setText(model.getValueAt(i,1).toString());
+	        txtFullname.setText(model.getValueAt(i,2).toString());
+	        txtMobile.setText(model.getValueAt(i,3).toString());
+	        txtCity.setText(model.getValueAt(i,3).toString());
+	        txtProvince.setText(model.getValueAt(i,3).toString());
 	    }
 
 }
