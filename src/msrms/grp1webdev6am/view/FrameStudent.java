@@ -18,6 +18,7 @@ import msrms.grp1webdev6am.controller.StudentAddDao;
 import msrms.grp1webdev6am.controller.StudentDeleteBenarDao;
 import msrms.grp1webdev6am.controller.StudentEditBenarDao;
 import msrms.grp1webdev6am.controller.StudentGetAllBEnarDao;
+import msrms.grp1webdev6am.controller.StudentSearchBenarDao;
 import msrms.grp1webdev6am.model.LoginModel;
 import msrms.grp1webdev6am.model.StudentAddModel;
 import msrms.grp1webdev6am.model.StudentModel;
@@ -226,6 +227,28 @@ public class FrameStudent extends JFrame {
 		JButton btnSearch = new JButton("");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					String emailAddress = txtEmailAddress.getText();
+					String fullname = txtFullname.getText();
+					String mobile = txtMobile.getText();
+					String city = txtCity.getText();
+					String province = txtProvince.getText();
+
+					StudentModel searchStudent = new StudentModel(emailAddress, fullname, mobile, city, province);
+					System.out.println("fr"+searchStudent.getEmailAddress());
+					System.out.println(searchStudent.getFullname());
+					System.out.println(searchStudent.getMobile());
+					System.out.println(searchStudent.getCity());
+					System.out.println(searchStudent.getProvince());
+					
+					showSearchStudents(searchStudent);
+
+										
+				}catch(Exception e1){
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Failed Searching the Student (fc)");
+				}
 			}
 		});
 		btnSearch.setBackground(Color.WHITE);
@@ -239,11 +262,31 @@ public class FrameStudent extends JFrame {
 //		model.setColumnIdentifiers(column);
 		showAllStudents();
 	}
+	public void showSearchStudents(StudentModel studentSearchBenarDao){
+		   
+		   StudentSearchBenarDao getSearchBenarDao = new StudentSearchBenarDao();
+	       List<StudentModel> list = getSearchBenarDao.getSearchStudents(studentSearchBenarDao);
+	       DefaultTableModel model = (DefaultTableModel)table.getModel();
+	       model.setRowCount(0);
+	       Object[] row = new Object[6];
+	       for(int i = 0; i < list.size(); i++)
+	       {
+	           row[0] = list.get(i).getId();
+	           row[1] = list.get(i).getEmailAddress();
+	           row[2] = list.get(i).getFullname();
+	           row[3] = list.get(i).getMobile();
+	           row[4] = list.get(i).getCity();
+	           row[5] = list.get(i).getProvince();
+	           
+	           model.addRow(row);
+	           System.out.println("fr"+i);	       }
+	    }
 	public void showAllStudents(){
 	   
 		   StudentGetAllBEnarDao getAllBenarDao = new StudentGetAllBEnarDao();
 	       List<StudentModel> list = getAllBenarDao.getAllStudents();
 	       DefaultTableModel model = (DefaultTableModel)table.getModel();
+	       model.setRowCount(0);
 	       Object[] row = new Object[6];
 	       for(int i = 0; i < list.size(); i++)
 	       {
@@ -269,8 +312,8 @@ public class FrameStudent extends JFrame {
 	        txtEmailAddress.setText(model.getValueAt(i,1).toString());
 	        txtFullname.setText(model.getValueAt(i,2).toString());
 	        txtMobile.setText(model.getValueAt(i,3).toString());
-	        txtCity.setText(model.getValueAt(i,3).toString());
-	        txtProvince.setText(model.getValueAt(i,3).toString());
+	        txtCity.setText(model.getValueAt(i,4).toString());
+	        txtProvince.setText(model.getValueAt(i,5).toString());
 	    }
 
 }
