@@ -25,18 +25,18 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class FrameClass extends JFrame {
+public class FrameBenarClass extends JFrame {
 
 	private JPanel contentPane;
 	DefaultTableModel model;
 	private JTable table;
 	private JScrollPane scrollPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField txtID;
+	private JTextField txtEmailAddress;
+	private JTextField txtFullname;
+	private JTextField txtClassName;
+	private JTextField txtInstructor;
+	private JTextField txtStatus;
 
 	/**
 	 * Launch the application.
@@ -57,7 +57,7 @@ public class FrameClass extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrameClass() {
+	public FrameBenarClass() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 700);
 		contentPane = new JPanel();
@@ -89,35 +89,35 @@ public class FrameClass extends JFrame {
 		));
 		scrollPane.setViewportView(table);
 		
-		textField = new JTextField();
-		textField.setBounds(67, 100, 143, 25);
-		panel.add(textField);
-		textField.setColumns(10);
+		txtID = new JTextField();
+		txtID.setBounds(67, 100, 143, 25);
+		panel.add(txtID);
+		txtID.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(209, 100, 143, 25);
-		panel.add(textField_1);
+		txtEmailAddress = new JTextField();
+		txtEmailAddress.setColumns(10);
+		txtEmailAddress.setBounds(209, 100, 143, 25);
+		panel.add(txtEmailAddress);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(352, 100, 143, 25);
-		panel.add(textField_2);
+		txtFullname = new JTextField();
+		txtFullname.setColumns(10);
+		txtFullname.setBounds(352, 100, 143, 25);
+		panel.add(txtFullname);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(494, 100, 143, 25);
-		panel.add(textField_3);
+		txtClassName = new JTextField();
+		txtClassName.setColumns(10);
+		txtClassName.setBounds(494, 100, 143, 25);
+		panel.add(txtClassName);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(635, 100, 143, 25);
-		panel.add(textField_4);
+		txtInstructor = new JTextField();
+		txtInstructor.setColumns(10);
+		txtInstructor.setBounds(635, 100, 143, 25);
+		panel.add(txtInstructor);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(776, 100, 143, 25);
-		panel.add(textField_5);
+		txtStatus = new JTextField();
+		txtStatus.setColumns(10);
+		txtStatus.setBounds(776, 100, 143, 25);
+		panel.add(txtStatus);
 		
 		JButton btnAdd = new JButton("");
 		btnAdd.addActionListener(new ActionListener() {
