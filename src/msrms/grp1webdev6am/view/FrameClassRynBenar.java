@@ -1,6 +1,5 @@
 package msrms.grp1webdev6am.view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -17,15 +16,14 @@ import java.awt.ComponentOrientation;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
-import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
 
 import msrms.grp1webdev6am.controller.ClassAddBenarDao;
 import msrms.grp1webdev6am.controller.ClassGetAllBenarDao;
-import msrms.grp1webdev6am.controller.StudentGetAllBEnarDao;
 import msrms.grp1webdev6am.model.ClassBenarModel;
 import msrms.grp1webdev6am.model.StudentModel;
 
@@ -104,13 +102,25 @@ public class FrameClassRynBenar extends JFrame {
 		ImageIcon image = new ImageIcon(newLogo);
 		mtdiLogo.setIcon(image);
 		
-		JButton studentBtn = new JButton("Student");
-		studentBtn.setBorder(new EmptyBorder(0, 0, 0, 0));
-		studentBtn.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		studentBtn.setBounds(397, 32, 104, 22);
-		studentBtn.setOpaque(false);
-		studentBtn.setContentAreaFilled(false);
-		banner.add(studentBtn);
+		JButton btnFrameStudent = new JButton("Student");
+		btnFrameStudent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					dispose();
+					FrameStudentRynBenar frame = new FrameStudentRynBenar();//edit
+					frame.setVisible(true);
+					
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		});
+		btnFrameStudent.setBorder(new EmptyBorder(0, 0, 0, 0));
+		btnFrameStudent.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		btnFrameStudent.setBounds(397, 32, 104, 22);
+		btnFrameStudent.setOpaque(false);
+		btnFrameStudent.setContentAreaFilled(false);
+		banner.add(btnFrameStudent);
 		
 		JButton classBtn = new JButton("Class");
 		classBtn.setFont(new Font("SansSerif", Font.PLAIN, 14));
@@ -140,6 +150,11 @@ public class FrameClassRynBenar extends JFrame {
 				"ID", "Email Address", "Full Name", "Class Name", "Instructor", "Status"
 			}
 		));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_Display_UsersMouseClicked(evt);
+            }
+         });
 		scrollPane.setViewportView(table);
 		JTableHeader THeader = table.getTableHeader();
 		THeader.setBackground(new Color(0,0,0,50));	
@@ -353,6 +368,7 @@ public class FrameClassRynBenar extends JFrame {
 						boolean isInsert = classAddBenarDao.insertClass(classBenarModel);
 						
 						if(isInsert) {
+							showAllClasses();
 //							JOptionPane.showMessageDialog(null, "Successfully Adding Class (tf)");
 						}
 						
@@ -478,5 +494,18 @@ public class FrameClassRynBenar extends JFrame {
 	           
 	           model.addRow(row);
 	       }
+	    }
+	   private void jTable_Display_UsersMouseClicked(java.awt.event.MouseEvent evt) {                                                  
+	       // Get The Index Of The Slected Row 
+	        int i = table.getSelectedRow();
+	        System.out.println("table clicked");
+
+	        TableModel model = table.getModel();
+	        
+	         // Display Slected Row In JTexteFields
+	        txtEmailAddress_class.setText(model.getValueAt(i,1).toString());
+	        txtClassName.setText(model.getValueAt(i,3).toString());
+	        txtInstructor.setText(model.getValueAt(i,4).toString());
+	        txtStatus.setText(model.getValueAt(i,5).toString());
 	    }
 }
