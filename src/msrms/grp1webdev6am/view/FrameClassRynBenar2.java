@@ -22,25 +22,15 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
-
-import msrms.grp1webdev6am.controller.ClassAddBenarDao;
-import msrms.grp1webdev6am.controller.ClassGetAllBenarDao;
-import msrms.grp1webdev6am.controller.StudentGetAllBEnarDao;
-import msrms.grp1webdev6am.model.ClassBenarModel;
-import msrms.grp1webdev6am.model.StudentModel;
-
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.util.List;
 import java.awt.event.ActionEvent;
 
-public class FrameClassRynBenar extends JFrame {
+public class FrameClassRynBenar2 extends JFrame {
 
 	private JPanel contentPane;
 	DefaultTableModel model;
@@ -60,7 +50,7 @@ public class FrameClassRynBenar extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrameClassRynBenar frame = new FrameClassRynBenar();
+					FrameClassRynBenar2 frame = new FrameClassRynBenar2();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -72,7 +62,7 @@ public class FrameClassRynBenar extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrameClassRynBenar() {
+	public FrameClassRynBenar2() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 700);
 		contentPane = new JPanel();
@@ -330,46 +320,6 @@ public class FrameClassRynBenar extends JFrame {
 		
 		
 		JButton btnAdd = new JButton("");
-		btnAdd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("add clicked");
-				
-				try {
-												
-					String emailAddress = txtEmailAddress_class.getText();
-					System.out.println(emailAddress);
-					
-					ClassAddBenarDao searchStudent = new ClassAddBenarDao();
-					StudentModel studentID = searchStudent.selectUser(emailAddress);
-										
-					System.out.println(studentID.getId());
-					
-//					StudentModel editStudent = new StudentModel(editID, txtFullname.getText(), txtMobile.getText(), txtCity.getText(), txtProvince.getText());
-//					StudentEditBenarDao studentEditBenarDao = new StudentEditBenarDao();
-//					studentEditBenarDao.updateStudent(editStudent);
-					try {					
-						ClassBenarModel classBenarModel = new ClassBenarModel(studentID.getId(),txtClassName.getText(),txtInstructor.getText(),txtStatus.getText());
-						ClassAddBenarDao classAddBenarDao = new ClassAddBenarDao();
-						boolean isInsert = classAddBenarDao.insertClass(classBenarModel);
-						
-						if(isInsert) {
-//							JOptionPane.showMessageDialog(null, "Successfully Adding Class (tf)");
-						}
-						
-												
-					}catch(Exception ex){
-						ex.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Failed Adding Class (cf)");
-					}
-					
-				}catch(Exception ex){
-					ex.printStackTrace();
-					JOptionPane.showMessageDialog(null, "Invalid Email Address (catch Frame)");
-				}
-
-
-			}
-		});
 		btnAdd.setBackground(Color.WHITE);
 		btnAdd.setBorder(null);
 		path="C:\\Users\\mar\\eclipse-proj1\\msrms\\src\\img\\add.png";
@@ -421,8 +371,6 @@ public class FrameClassRynBenar extends JFrame {
 		JButton btnSearch = new JButton("");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("search clicked");
-				JOptionPane.showMessageDialog(null, "search clickedt");
 			}
 		});
 		btnSearch.setBackground(Color.WHITE);
@@ -456,27 +404,7 @@ public class FrameClassRynBenar extends JFrame {
 		adminName.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		adminName.setBounds(885, 143, 84, 14);
 		panel.add(adminName);
-		
-		showAllClasses();
 	
 	}
-	public void showAllClasses(){
-		   
-		   ClassGetAllBenarDao classGetAllBenarDao = new ClassGetAllBenarDao();
-	       List<ClassBenarModel> list = classGetAllBenarDao.getAllClasses();
-	       DefaultTableModel model = (DefaultTableModel)table.getModel();
-	       model.setRowCount(0);
-	       Object[] row = new Object[6];
-	       for(int i = 0; i < list.size(); i++)
-	       {
-	           row[0] = list.get(i).getId();
-	           row[1] = list.get(i).getEmailAddressStudent();
-	           row[2] = list.get(i).getFullnameStudent();
-	           row[3] = list.get(i).getClassName();
-	           row[4] = list.get(i).getInstructor();
-	           row[5] = list.get(i).get_status();
-	           
-	           model.addRow(row);
-	       }
-	    }
 }
+
