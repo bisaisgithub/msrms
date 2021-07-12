@@ -155,7 +155,7 @@ public class FrameStudent extends JFrame {
 					
 					StudentAddDao insertStudentDao = new StudentAddDao();
 					insertStudentDao.insertStudent(newStudent);
-
+					showAllStudents();
 										
 				}catch(SQLException e1){
 					e1.printStackTrace();
