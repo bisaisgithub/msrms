@@ -13,13 +13,12 @@ import msrms.grp1webdev6am.util.DBConnection;
 
 public class ClassAddBenarDao {
 	
-	private static final String SELECT_USER_BY_EMAIL = "select emailAddress, id, fullname from students where emailAddress = ?";
+	private static final String SELECT_USER_BY_EMAIL = "select id from students where emailAddress = ?";
 	
-	private static final String INSERT_CLASS = "INSERT INTO classes" + "  (studentID, fullName, mobile, City, province) VALUES "
-			+ " (?, ?, ?, ?, ?);";
+	private static final String INSERT_CLASS = "INSERT INTO classes" + "  (studentID, className, instructor, _status) VALUES "
+			+ " (?, ?, ?, ?);";
 	
 	public StudentModel selectUser(String emailAddress) {
-		JOptionPane.showMessageDialog(null, "select user "+emailAddress);
 		final String SELECT_USER_BY_EMAIL2 = "select id, emailAddress, fullname from students where emailAddress ='"+emailAddress+"'";
 		StudentModel student = null;
 		// Step 1: Establishing a Connection
@@ -44,8 +43,9 @@ public class ClassAddBenarDao {
 		return student;
 	}
 	
-	public void insertClass(ClassBenarModel _class) throws SQLException {
-		System.out.println(INSERT_CLASS);
+	public boolean insertClass(ClassBenarModel _class) throws SQLException {
+		System.out.println();
+		boolean isInsert = true;
 		// try-with-resource statement will auto close the connection.
 		try (Connection connection = DBConnection.createConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CLASS)) {
@@ -53,14 +53,17 @@ public class ClassAddBenarDao {
 			preparedStatement.setString(2, _class.getClassName());
 			preparedStatement.setString(3, _class.getInstructor());
 			preparedStatement.setString(4, _class.get_status());
-			preparedStatement.setString(5, _class.getProvince());
 			System.out.println(preparedStatement);
 			preparedStatement.executeUpdate();
 			JOptionPane.showMessageDialog(null, "Successfully Adding the Class");
 		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Failed Adding the Class (cd)");
+			isInsert = false;
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Failed Adding the Class");
+			
+		
 		}
+		return isInsert;
 	}
 	
 	private void printSQLException(SQLException ex) {

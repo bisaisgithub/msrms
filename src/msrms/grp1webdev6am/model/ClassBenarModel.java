@@ -6,10 +6,16 @@ public class ClassBenarModel {
 	protected String className;
 	protected String instructor;
 	protected String _status;
-	protected String province;
 	
 	
-	
+	public ClassBenarModel(int studentID, String className, String instructor, String _status) {
+		super();
+		this.studentID = studentID;
+		this.className = className;
+		this.instructor = instructor;
+		this._status = _status;
+		
+	}
 	public int getId() {
 		return id;
 	}
@@ -40,10 +46,5 @@ public class ClassBenarModel {
 	public void set_status(String _status) {
 		this._status = _status;
 	}
-	public String getProvince() {
-		return province;
-	}
-	public void setProvince(String province) {
-		this.province = province;
-	}
+
 }
