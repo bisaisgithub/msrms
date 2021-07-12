@@ -24,6 +24,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
 import msrms.grp1webdev6am.controller.ClassAddBenarDao;
+import msrms.grp1webdev6am.model.ClassBenarModel;
 import msrms.grp1webdev6am.model.StudentModel;
 
 import javax.swing.JTextField;
@@ -343,16 +344,27 @@ public class FrameClassRynBenar extends JFrame {
 //					StudentModel editStudent = new StudentModel(editID, txtFullname.getText(), txtMobile.getText(), txtCity.getText(), txtProvince.getText());
 //					StudentEditBenarDao studentEditBenarDao = new StudentEditBenarDao();
 //					studentEditBenarDao.updateStudent(editStudent);
+					try {					
+						ClassBenarModel classBenarModel = new ClassBenarModel(studentID.getId(),txtClassName.getText(),txtInstructor.getText(),txtStatus.getText());
+						ClassAddBenarDao classAddBenarDao = new ClassAddBenarDao();
+						boolean isInsert = classAddBenarDao.insertClass(classBenarModel);
+						
+						if(isInsert) {
+//							JOptionPane.showMessageDialog(null, "Successfully Adding Class (tf)");
+						}
+						
+												
+					}catch(Exception ex){
+						ex.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Failed Adding Class (cf)");
+					}
 					
 				}catch(Exception ex){
 					ex.printStackTrace();
 					JOptionPane.showMessageDialog(null, "Invalid Email Address (catch Frame)");
 				}
-//				if(Integer.parseInt(txtID.getText()) >= 0) {
-//					System.out.println("Empty ID");
-//				}else {
-//					System.out.println("Empty Not Empty");
-//				}
+
+
 			}
 		});
 		btnAdd.setBackground(Color.WHITE);
