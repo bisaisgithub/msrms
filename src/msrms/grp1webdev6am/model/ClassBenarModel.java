@@ -27,6 +27,12 @@ public class ClassBenarModel {
 	}
 
 
+	public ClassBenarModel(int id) {
+		super();
+		this.id = id;
+	}
+
+
 	public String getEmailAddressStudent() {
 		return emailAddressStudent;
 	}

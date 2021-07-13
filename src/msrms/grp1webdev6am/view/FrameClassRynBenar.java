@@ -23,8 +23,10 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
 import msrms.grp1webdev6am.controller.ClassAddBenarDao;
+import msrms.grp1webdev6am.controller.ClassDeleteBenarDao;
 import msrms.grp1webdev6am.controller.ClassEditBenarDao;
 import msrms.grp1webdev6am.controller.ClassGetAllBenarDao;
+import msrms.grp1webdev6am.controller.StudentDeleteBenarDao;
 import msrms.grp1webdev6am.controller.StudentEditBenarDao;
 import msrms.grp1webdev6am.model.ClassBenarModel;
 import msrms.grp1webdev6am.model.StudentModel;
@@ -452,6 +454,21 @@ public class FrameClassRynBenar extends JFrame {
 		btnEdit.setIcon(editImage);
 		
 		JButton btnDelete = new JButton("");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int deleteClassID = Integer.parseInt(txtID_class.getText());
+					ClassDeleteBenarDao classtDeleteBenarDao = new ClassDeleteBenarDao();
+					classtDeleteBenarDao.deleteClass(deleteClassID);
+					showAllClasses();
+					
+				}catch(Exception ex){
+					ex.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Invalid ID (cf)");
+				}
+
+			}
+		});
 		btnDelete.setBackground(Color.WHITE);
 		btnDelete.setBorder(null);
 		path="C:\\Users\\mar\\eclipse-proj1\\msrms\\src\\img\\delete.png";
