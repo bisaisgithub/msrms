@@ -16,6 +16,17 @@ public class ClassBenarModel {
 		this.instructor = instructor;
 		this._status = _status;
 	}
+	
+	
+	public ClassBenarModel(String _status, String className, String instructor, int id) {
+		super();
+		this.id = id;
+		this.className = className;
+		this.instructor = instructor;
+		this._status = _status;
+	}
+
+
 	public String getEmailAddressStudent() {
 		return emailAddressStudent;
 	}

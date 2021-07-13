@@ -395,10 +395,15 @@ public class FrameStudentRynBenar extends JFrame {
 		
 		//reset button	
 		JButton btnReset = new JButton("");
+		btnReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				resetInputFields();
+			}
+		});
 		btnReset.setBorder(null);
 		btnReset.setBackground(Color.WHITE);
 		path="C:\\Users\\mar\\eclipse-proj1\\msrms\\src\\img\\risit.png";
-		btnReset.setBounds(902, 184, 27, 27);
+		btnReset.setBounds(173, 186, 27, 27);
 		panel.add(btnReset);
 		ImageIcon myReset = new ImageIcon(path);
 		Image reset = myReset.getImage();
@@ -589,4 +594,12 @@ public class FrameStudentRynBenar extends JFrame {
 	        txtCity.setText(model.getValueAt(i,4).toString());
 	        txtProvince.setText(model.getValueAt(i,5).toString());
 	    }
+	   public void resetInputFields() {
+	        txtID.setText("");
+	        txtEmailAddress.setText("");
+	        txtFullname.setText("");
+	        txtMobile.setText("");
+	        txtCity.setText("");
+	        txtProvince.setText(""); 
+	   }
 }

@@ -23,7 +23,9 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
 import msrms.grp1webdev6am.controller.ClassAddBenarDao;
+import msrms.grp1webdev6am.controller.ClassEditBenarDao;
 import msrms.grp1webdev6am.controller.ClassGetAllBenarDao;
+import msrms.grp1webdev6am.controller.StudentEditBenarDao;
 import msrms.grp1webdev6am.model.ClassBenarModel;
 import msrms.grp1webdev6am.model.StudentModel;
 
@@ -399,10 +401,15 @@ public class FrameClassRynBenar extends JFrame {
 		
 		//reset button	
 		JButton btnReset = new JButton("");
+		btnReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				resetInputFields();
+			}
+		});
 		btnReset.setBorder(null);
 		btnReset.setBackground(Color.WHITE);
 		path="C:\\Users\\mar\\eclipse-proj1\\msrms\\src\\img\\risit.png";
-		btnReset.setBounds(902, 184, 27, 27);
+		btnReset.setBounds(175, 186, 27, 27);
 		panel.add(btnReset);
 		ImageIcon myReset = new ImageIcon(path);
 		Image reset = myReset.getImage();
@@ -411,6 +418,28 @@ public class FrameClassRynBenar extends JFrame {
 		btnReset.setIcon(resetImage);
 
 		JButton btnEdit = new JButton("");
+		btnEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					int editClassID = Integer.parseInt(txtID_class.getText());
+					System.out.println("Not Empty ID");
+					ClassBenarModel editClass = new ClassBenarModel(txtStatus.getText(), txtClassName.getText(), txtInstructor.getText(), editClassID);
+					ClassEditBenarDao classEditBenarDao = new ClassEditBenarDao();
+					classEditBenarDao.updateClass(editClass);
+					showAllClasses();
+					
+				}catch(Exception ex){
+					ex.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Invalid ID");
+				}
+//				if(Integer.parseInt(txtID.getText()) >= 0) {
+//					System.out.println("Empty ClassID");
+//				}else {
+//					System.out.println("Not Empty");
+//				}
+			}
+		});
 		btnEdit.setBackground(Color.WHITE);
 		btnEdit.setBorder(null);
 		path = "C:\\Users\\mar\\eclipse-proj1\\msrms\\src\\img\\edit.png";
@@ -498,14 +527,24 @@ public class FrameClassRynBenar extends JFrame {
 	   private void jTable_Display_UsersMouseClicked(java.awt.event.MouseEvent evt) {                                                  
 	       // Get The Index Of The Slected Row 
 	        int i = table.getSelectedRow();
-	        System.out.println("table clicked");
+//	        System.out.println("table clicked");
 
 	        TableModel model = table.getModel();
 	        
 	         // Display Slected Row In JTexteFields
+	        txtID_class.setText(model.getValueAt(i, 0).toString());
 	        txtEmailAddress_class.setText(model.getValueAt(i,1).toString());
+	        txtFullname_class.setText(model.getValueAt(i, 2).toString());
 	        txtClassName.setText(model.getValueAt(i,3).toString());
 	        txtInstructor.setText(model.getValueAt(i,4).toString());
 	        txtStatus.setText(model.getValueAt(i,5).toString());
 	    }
+	   public void resetInputFields() {
+	        txtID_class.setText("");
+	        txtEmailAddress_class.setText("");
+	        txtFullname_class.setText("");
+	        txtClassName.setText("");
+	        txtInstructor.setText("");
+	        txtStatus.setText(""); 
+	   }
 }
