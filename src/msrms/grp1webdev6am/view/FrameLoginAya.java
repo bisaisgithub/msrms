@@ -107,7 +107,7 @@ public class FrameLoginAya extends JFrame {
 					if(loginModelFrame.getEmailAddress().equals(loginModelDB.getEmailAddress())) {
 						System.out.println("FrameLogin Login Success");
 						dispose();
-						FrameStudent frameStudent = new FrameStudent();
+						FrameStudentRynBenar frameStudent = new FrameStudentRynBenar();
 						frameStudent.show();
 					}else {
 						JOptionPane.showMessageDialog(null, "Email Address or Password Invalid");
