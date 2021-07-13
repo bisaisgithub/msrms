@@ -26,8 +26,10 @@ import msrms.grp1webdev6am.controller.ClassAddBenarDao;
 import msrms.grp1webdev6am.controller.ClassDeleteBenarDao;
 import msrms.grp1webdev6am.controller.ClassEditBenarDao;
 import msrms.grp1webdev6am.controller.ClassGetAllBenarDao;
+import msrms.grp1webdev6am.controller.ClassSearchBenarDao;
 import msrms.grp1webdev6am.controller.StudentDeleteBenarDao;
 import msrms.grp1webdev6am.controller.StudentEditBenarDao;
+import msrms.grp1webdev6am.controller.StudentSearchBenarDao;
 import msrms.grp1webdev6am.model.ClassBenarModel;
 import msrms.grp1webdev6am.model.StudentModel;
 
@@ -483,8 +485,23 @@ public class FrameClassRynBenar extends JFrame {
 		JButton btnSearch = new JButton("");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("search clicked");
-				JOptionPane.showMessageDialog(null, "search clickedt");
+				
+				try {
+					String emailAddress_class = txtEmailAddress_class.getText();
+					String fullname_class = txtFullname_class.getText();
+					String className = txtClassName.getText();
+					String instructor = txtInstructor.getText();
+					String _status = txtStatus.getText();
+
+					ClassBenarModel searchClass = new ClassBenarModel(emailAddress_class, fullname_class, className, instructor, _status);
+					
+					showSearchClass(searchClass);
+
+										
+				}catch(Exception e1){
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Failed Searching the Student (fc)");
+				}
 			}
 		});
 		btnSearch.setBackground(Color.WHITE);
@@ -564,4 +581,24 @@ public class FrameClassRynBenar extends JFrame {
 	        txtInstructor.setText("");
 	        txtStatus.setText(""); 
 	   }
+		public void showSearchClass(ClassBenarModel classBenarModel){
+			   
+			   ClassSearchBenarDao classSerchBenarDao = new ClassSearchBenarDao();
+		       List<ClassBenarModel> list = classSerchBenarDao.getSearchClasses(classBenarModel);
+		       DefaultTableModel model = (DefaultTableModel)table.getModel();
+		       model.setRowCount(0);
+		       Object[] row = new Object[6];
+		       for(int i = 0; i < list.size(); i++)
+		       {
+		           row[0] = list.get(i).getId();
+		           row[1] = list.get(i).getEmailAddressStudent();
+		           row[2] = list.get(i).getFullnameStudent();
+		           row[3] = list.get(i).getClassName();
+		           row[4] = list.get(i).getInstructor();
+		           row[5] = list.get(i).get_status();
+		           
+		           model.addRow(row);
+		           System.out.println("fr"+i);	       
+		           }
+		    }
 }
