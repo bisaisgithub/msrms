@@ -455,6 +455,7 @@ public class FrameStudentRynBenar extends JFrame {
 					StudentModel editStudent = new StudentModel(deleteID);
 					StudentDeleteBenarDao studentEditBenarDao = new StudentDeleteBenarDao();
 					studentEditBenarDao.deleteStudent(deleteID);
+					showAllStudents();
 					
 				}catch(Exception ex){
 					ex.printStackTrace();
