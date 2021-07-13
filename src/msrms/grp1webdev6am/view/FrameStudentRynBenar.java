@@ -192,6 +192,7 @@ public class FrameStudentRynBenar extends JFrame {
 	//	scrollPane.setViewportView(table);
 		
 		txtID = new JTextField();
+		txtID.setEditable(false);
 		txtID.addFocusListener(new FocusAdapter() {
 			
 			public void focusGained(FocusEvent e) {
@@ -213,7 +214,7 @@ public class FrameStudentRynBenar extends JFrame {
 			}
 		});
 		txtID.setForeground(Color.LIGHT_GRAY);
-		txtID.setText("ID");
+		txtID.setText("");
 		txtID.setColumns(10);
 		txtID.setBounds(94, 245, 84, 25);
 		panel.add(txtID);
@@ -422,6 +423,7 @@ public class FrameStudentRynBenar extends JFrame {
 					StudentModel editStudent = new StudentModel(editID, txtFullname.getText(), txtMobile.getText(), txtCity.getText(), txtProvince.getText());
 					StudentEditBenarDao studentEditBenarDao = new StudentEditBenarDao();
 					studentEditBenarDao.updateStudent(editStudent);
+					showAllStudents();
 					
 				}catch(Exception ex){
 					ex.printStackTrace();
@@ -583,7 +585,7 @@ public class FrameStudentRynBenar extends JFrame {
 	   private void jTable_Display_UsersMouseClicked(java.awt.event.MouseEvent evt) {                                                  
 	       // Get The Index Of The Slected Row 
 	        int i = table.getSelectedRow();
-	        System.out.println("table clicked");
+//	        System.out.println("table clicked");
 
 	        TableModel model = table.getModel();
 	        
@@ -594,6 +596,13 @@ public class FrameStudentRynBenar extends JFrame {
 	        txtMobile.setText(model.getValueAt(i,3).toString());
 	        txtCity.setText(model.getValueAt(i,4).toString());
 	        txtProvince.setText(model.getValueAt(i,5).toString());
+	        
+	        txtID.setForeground(Color.BLACK);	
+	        txtEmailAddress.setForeground(Color.BLACK);	
+	        txtFullname.setForeground(Color.BLACK);	
+	        txtMobile.setForeground(Color.BLACK);	
+	        txtCity.setForeground(Color.BLACK);	
+	        txtProvince.setForeground(Color.BLACK);	
 	    }
 	   public void resetInputFields() {
 	        txtID.setText("");

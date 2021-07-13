@@ -187,6 +187,7 @@ public class FrameClassRynBenar extends JFrame {
 		table.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		
 		txtID_class = new JTextField();
+		txtID_class.setEditable(false);
 		txtID_class.addFocusListener(new FocusAdapter() {
 			
 			public void focusGained(FocusEvent e) {
@@ -572,6 +573,14 @@ public class FrameClassRynBenar extends JFrame {
 	        txtClassName.setText(model.getValueAt(i,3).toString());
 	        txtInstructor.setText(model.getValueAt(i,4).toString());
 	        txtStatus.setText(model.getValueAt(i,5).toString());
+	        
+	        txtID_class.setForeground(Color.BLACK);	
+	        txtEmailAddress_class.setForeground(Color.BLACK);	
+	        txtFullname_class.setForeground(Color.BLACK);	
+	        txtClassName.setForeground(Color.BLACK);	
+	        txtInstructor.setForeground(Color.BLACK);	
+	        txtStatus.setForeground(Color.BLACK);
+	        
 	    }
 	   public void resetInputFields() {
 	        txtID_class.setText("");
